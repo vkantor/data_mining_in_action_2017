@@ -18,7 +18,7 @@ class Checker(object):
         try:
             algo = gb_impl.SimpleGB(
                 tree_params_dict=gb_impl.TREE_PARAMS_DICT,
-                iters=1,
+                iters=100,
                 tau=gb_impl.TAU
             )
             return np.mean(cross_val_score(algo, self.X_data, self.y_data, cv=5, scoring='neg_mean_squared_error'))
