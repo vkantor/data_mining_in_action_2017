@@ -11,7 +11,7 @@ SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 
 def signal_handler(signum, frame):
-        raise Exception("Timed out!")
+    raise Exception("Timed out!")
 
 
 class Checker(object):
@@ -21,18 +21,19 @@ class Checker(object):
         self.bioresponce_data = bioresponce.iloc[:, 1:]
 
     def check(self, params_path):
-        with open(params_path, 'r') as f:
-            params = json.load(f)
-
-        signal.signal(signal.SIGALRM, signal_handler)
-        signal.alarm(60)
-        estimator = xgb.XGBClassifier(**params)
         try:
+            with open(params_path, 'r') as f:
+                params = json.load(f)
+
+            signal.signal(signal.SIGALRM, signal_handler)
+            signal.alarm(120)
+            estimator = xgb.XGBClassifier(**params)
             score = np.mean(cross_val_score(
                 estimator, self.bioresponce_data, self.bioresponce_target,
-                scoring = 'accuracy', cv = 3
+                scoring='accuracy', 
+                cv=3
             ))
-        except Exception, msg:
+        except:
             score = None
         
         return score

@@ -3,8 +3,8 @@ from sklearn.tree import DecisionTreeRegressor
 import numpy as np
 
 
-TREE_PARAMS_DICT = {}
-TAU = 0.1
+TREE_PARAMS_DICT = {'max_depth': 2}
+TAU = 0.05
 
 
 class SimpleGB(BaseEstimator):
@@ -14,15 +14,17 @@ class SimpleGB(BaseEstimator):
         self.tau = tau
         
     def fit(self, X_data, y_data):
+        self.base_algo = DecisionTreeRegressor(**self.tree_params_dict).fit(X_data, y_data)
         self.estimators = []
-        curr_pred = 0
+        curr_pred = self.base_algo.predict(X_data)
         for iter_num in xrange(self.iters):
-            self.estimators.append(DecisionTreeRegressor(**self.tree_params_dict).fit(X_data, y_data))
+            algo = DecisionTreeRegressor(**self.tree_params_dict).fit(X_data, y_data - curr_pred)
+            self.estimators.append(algo)
+            curr_pred += self.tau * algo.predict(X_data)
         return self
     
     def predict(self, X_data):
-        res = np.zeros(X_data.shape[0])
+        res = self.base_algo.predict(X_data)
         for estimator in self.estimators:
-            res += estimator.predict(X_data)
-        res /= len(self.estimators)
+            res += self.tau * estimator.predict(X_data)
         return res
