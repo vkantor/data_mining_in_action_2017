@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1251">
+<link rel="shortcut icon" href="https://vk.com/images/icons/favicons/fav_logo_2x.ico?5">  <link rel="stylesheet" type="text/css" href="DMIA2017_Lecture4_Features_and_Metrics_files/fonts_cnt.css">
+  <link rel="stylesheet" type="text/css" href="DMIA2017_Lecture4_Features_and_Metrics_files/common.css"><title>DMIA2017_Lecture4_Features_and_Metrics.pdf</title>
+<style>
+html, body {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  border: none;
+}
+.iframe {
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.docs_name {
+  display: block;
+  padding-top: 7px;
+}
+.docs_info {
+  padding: 7px 10px 0px;
+  color: #939699;
+}
+.docs_panel_wrap {
+  height: 50px;
+}
+.docs_panel {
+  background: #F1F1F1;
+  position: fixed;
+  width: 100%;
+  -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+}
+.docs_panel .docs_del_wrap {
+  margin: 0 5px;
+}
+.can_zoom {
+  max-width: 100%;
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: -zoom-in;
+}
+.docs_panel .fl_r + .fl_r {
+    margin-right: 10px;
+}
+.can_zoom_out {
+  min-width: 100%;
+  cursor: -webkit-zoom-out;
+  cursor: -moz-zoom-out;
+  cursor: -zoom-out;
+}
+</style>
+<script>
+function saveDoc() {
+  var src = 'https://psv4.userapi.com/c816438/u98307983/docs/71470c8a9012/DMIA2017_Lecture4_Features_and_Metrics.pdf?extra=fq5VFbGbIvZ2379Nba1b2EsqALqPhPP4o-BNbjTO3oWiAoKwoSNNi1lxGGPWs6BRv7ZxhUXVc57qB5DU3wvm9azfcUZNjXJTOrJs321jSH-tRaslV-JqmjLaX6W27lGJhlaDhAg7Now';
+  if (src.match(/\?/)) {
+    src += '&dl=1';
+  } else {
+    src += '?dl=1';
+  }
+  location.replace(src);
+  return false;
+}
+
+function saveLitresDoc() {
+  var anchor = document.createElement('a');
+  anchor.href = 'https://psv4.userapi.com/c816438/u98307983/docs/71470c8a9012/DMIA2017_Lecture4_Features_and_Metrics.pdf?extra=fq5VFbGbIvZ2379Nba1b2EsqALqPhPP4o-BNbjTO3oWiAoKwoSNNi1lxGGPWs6BRv7ZxhUXVc57qB5DU3wvm9azfcUZNjXJTOrJs321jSH-tRaslV-JqmjLaX6W27lGJhlaDhAg7Now';
+  anchor.target = '_blank';
+  anchor.download = 'book.pdf';
+
+  var clickEvent = new MouseEvent("click", {
+    "view": window,
+    "bubbles": true,
+    "cancelable": false
+  });
+  anchor.dispatchEvent(clickEvent);
+}
+function litresBuy() {
+    var src= '/doclinks.php?link=&hash=c29555746f65cfaa6d3d6d8b142a4905&act=buy_from_preview_page&platform=web2';
+    if (src) {
+        window.location = src;
+    }
+    return false;
+}
+function imgZoom(obj) {
+  if (obj.className == 'can_zoom') {
+    obj.className = 'can_zoom_out';
+  } else {
+    obj.className = 'can_zoom';
+    window.scroll(0, 0);
+  }
+}
+</script>
+</head>
+<body onkeydown="if (event.keyCode == 83 &amp;&amp; (event.ctrlKey || event.metaKey)) return saveDoc(event);">
+<noindex>
+<div class="docs_panel_wrap">
+  <div class="docs_panel">
+    <div class="clear_fix" style="padding: 10px 20px;">
+      <button class="flat_button fl_r" onclick="return saveDoc();">Сохранить документ на диск</button>
+      <div class="docs_info fl_r"></div>
+      <a class="docs_name fl_l" onclick="return saveDoc();"><b>DMIA2017_Lecture4_Features_and_Metrics.pdf</b></a>&nbsp;
+    </div>
+  </div>
+</div><iframe id="iframe" class="iframe" src="DMIA2017_Lecture4_Features_and_Metrics_files/DMIA2017_Lecture4_Features_and_Metrics_002.pdf" height="100%" width="100%"></iframe>
+</noindex>
+
+</body></html>

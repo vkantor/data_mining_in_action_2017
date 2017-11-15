@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1251">
+<link rel="shortcut icon" href="https://vk.com/images/icons/favicons/fav_logo_2x.ico?5">  <link rel="stylesheet" type="text/css" href="DMIA2017_Lecture3_Unsupervised_learning_files/fonts_cnt.css">
+  <link rel="stylesheet" type="text/css" href="DMIA2017_Lecture3_Unsupervised_learning_files/common.css"><title>DMIA2017_Lecture3_Unsupervised_learning.pdf</title>
+<style>
+html, body {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  border: none;
+}
+.iframe {
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.docs_name {
+  display: block;
+  padding-top: 7px;
+}
+.docs_info {
+  padding: 7px 10px 0px;
+  color: #939699;
+}
+.docs_panel_wrap {
+  height: 50px;
+}
+.docs_panel {
+  background: #F1F1F1;
+  position: fixed;
+  width: 100%;
+  -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+}
+.docs_panel .docs_del_wrap {
+  margin: 0 5px;
+}
+.can_zoom {
+  max-width: 100%;
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: -zoom-in;
+}
+.docs_panel .fl_r + .fl_r {
+    margin-right: 10px;
+}
+.can_zoom_out {
+  min-width: 100%;
+  cursor: -webkit-zoom-out;
+  cursor: -moz-zoom-out;
+  cursor: -zoom-out;
+}
+</style>
+<script>
+function saveDoc() {
+  var src = 'https://psv4.userapi.com/c816136/u98307983/docs/9ba7c44b4794/DMIA2017_Lecture3_Unsupervised_learning.pdf?extra=Ln9bOG-vXquAhPRLA1IDMCFKCDowp7TEac15UkBqC7wHoe764ubfZO6VRX-npfgu2RyHiLN3VCE6-Phgp7sUP31-tox8yyt4XPhiscmsGNohkff5K0uwrpt1w_Ay92tAIlOcV_0TRhs';
+  if (src.match(/\?/)) {
+    src += '&dl=1';
+  } else {
+    src += '?dl=1';
+  }
+  location.replace(src);
+  return false;
+}
+
+function saveLitresDoc() {
+  var anchor = document.createElement('a');
+  anchor.href = 'https://psv4.userapi.com/c816136/u98307983/docs/9ba7c44b4794/DMIA2017_Lecture3_Unsupervised_learning.pdf?extra=Ln9bOG-vXquAhPRLA1IDMCFKCDowp7TEac15UkBqC7wHoe764ubfZO6VRX-npfgu2RyHiLN3VCE6-Phgp7sUP31-tox8yyt4XPhiscmsGNohkff5K0uwrpt1w_Ay92tAIlOcV_0TRhs';
+  anchor.target = '_blank';
+  anchor.download = 'book.pdf';
+
+  var clickEvent = new MouseEvent("click", {
+    "view": window,
+    "bubbles": true,
+    "cancelable": false
+  });
+  anchor.dispatchEvent(clickEvent);
+}
+function litresBuy() {
+    var src= '/doclinks.php?link=&hash=c29555746f65cfaa6d3d6d8b142a4905&act=buy_from_preview_page&platform=web2';
+    if (src) {
+        window.location = src;
+    }
+    return false;
+}
+function imgZoom(obj) {
+  if (obj.className == 'can_zoom') {
+    obj.className = 'can_zoom_out';
+  } else {
+    obj.className = 'can_zoom';
+    window.scroll(0, 0);
+  }
+}
+</script>
+</head>
+<body onkeydown="if (event.keyCode == 83 &amp;&amp; (event.ctrlKey || event.metaKey)) return saveDoc(event);">
+<noindex>
+<div class="docs_panel_wrap">
+  <div class="docs_panel">
+    <div class="clear_fix" style="padding: 10px 20px;">
+      <button class="flat_button fl_r" onclick="return saveDoc();">Сохранить документ на диск</button>
+      <div class="docs_info fl_r"></div>
+      <a class="docs_name fl_l" onclick="return saveDoc();"><b>DMIA2017_Lecture3_Unsupervised_learning.pdf</b></a>&nbsp;
+    </div>
+  </div>
+</div><iframe id="iframe" class="iframe" src="DMIA2017_Lecture3_Unsupervised_learning_files/DMIA2017_Lecture3_Unsupervised_learning_002.pdf" width="100%" height="100%"></iframe>
+</noindex>
+
+</body></html>
