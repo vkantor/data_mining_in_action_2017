@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     best_accuracy = max(results.values())
     for name in results:
-        scores[name] = max(round(2 ** (10 * (results[name] - best_accuracy)), 2), 0.05)
+        scores[name] = max(round(2 ** (30 * (results[name] - best_accuracy)), 2), 0.05)
 
     with open('xgboost_params_results.json', 'w') as f:
         json.dump(scores, f, indent=4)
