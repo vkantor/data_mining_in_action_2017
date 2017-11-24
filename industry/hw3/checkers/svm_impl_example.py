@@ -1,70 +1,81 @@
+# coding=utf-8
 import numpy as np
 from sklearn.base import BaseEstimator
 
 
 SVM_PARAMS_DICT = {
-    'C': 1000,
-    'random_state': 42,
-    'iters': 10000
+    'C': 10.,
+    'random_state': 777,
+    'iters': 10000,
+    'batch_size': 100,
+    'step': 0.015
 }
 
 
 class MySVM(BaseEstimator):
-    def __init__(self, C, random_state, iters):
+    def __init__(self, C, random_state, iters, batch_size, step):
         self.C = C
         self.random_state = random_state
         self.iters = iters
-        # I'd recommend you to add your more own parameters
+        self.batch_size = batch_size
+        self.step = step
 
-    # f(x) = <w,x> + w_0
-    def f(self, x):
-        return np.dot(self.w, x) + self.w0
+    # будем пользоваться этой функцией для подсчёта <w, x>
+    def __predict(self, X):
+        return np.dot(X, self.w) + self.w0
 
-    # a(x) = [f(x) > 0]
-    def a(self, x):
-        return 1 if self.f(x) > 0 else 0
-    
-    # predicting answers for X_test
-    def predict(self, X_test):
-        return np.array([self.a(x) for x in X_test])
+    # sklearn нужно, чтобы predict возвращал классы, поэтому оборачиваем наш __predict в это
+    def predict(self, X):
+        res = self.__predict(X)
+        res[res > 0] = 1
+        res[res < 0] = 0
+        return res
 
-    # l2-regularizator
-    def reg(self):
-        return 1.0 * sum(self.w ** 2) / (2.0 * self.C)
-
-    # l2-regularizator derivative
+    # производная регуляризатора
     def der_reg(self):
-        '''ToDo: fix this function'''
-        return 0.0
+        return 1. / self.C * self.w
 
-    # hinge loss
-    def loss(self, x, answer):
-        return max([0, 1 - answer * self.f(x)])
+    # будем считать стохастический градиент не на одном элементе, а сразу на пачке (чтобы было эффективнее)
+    def der_loss(self, x, y):
+        # s.shape == (batch_size, features)
+        # y.shape == (batch_size,)
 
-    # hinge loss derivative
-    def der_loss(self, x, answer):
-        return -1.0 if 1 - answer * self.f(x) > 0 else 0.0
+        # считаем производную по каждой координате на каждом объекте
+        ders_w = - y[:, np.newaxis] * x
+        der_w0 = - y
 
-    # fitting w and w_0 with SGD
+        # занулить производные там, где отступ > 1
+        indices = (1. - y * self.__predict(x)) < 0.
+        ders_w[indices, :] = 0.
+        der_w0[indices] = 0.
+
+        # для масштаба возвращаем средний градиент по пачке
+        return ders_w.mean(axis=0), der_w0.mean()
+
     def fit(self, X_train, y_train):
+        # RandomState для воспроизводитмости
         random_gen = np.random.RandomState(self.random_state)
-        dim = len(X_train[0])
-        self.w = random_gen.rand(dim) # initial value for w
-        self.w0 = random_gen.randn() # initial value for w_0
         
-        for k in range(self.iters):  
-            
-            # random example choise
-            rand_index = random_gen.choice(dim) # generating random index
-            x = X_train[rand_index]
-            y = y_train[rand_index]
+        # получаем размерности матрицы
+        size, dim = X_train.shape
+        
+        # случайная начальная инициализация
+        self.w = random_gen.rand(dim)
+        self.w0 = random_gen.randn()
 
-            # simple heuristic for step size
-            step = 0.5 * 0.9 ** k
+        for _ in range(self.iters):  
+            # берём случайный набор элементов
+            rand_indices = random_gen.choice(size, self.batch_size)
+            x = X_train[rand_indices]
+            y = y_train[rand_indices] * 2 - 1 # исходные метки классов это 0/1 а нам надо -1/1
 
-            # w update
-            '''ToDo: add w update with regularization'''
-            
-            # w_0 update
-            '''ToDo: add w_0 update'''
+            # считаем производные
+            der_w, der_w0 = self.der_loss(x, y)
+            der_w += self.der_reg()
+
+            # обновляемся по антиградиенту
+            self.w -= der_w * self.step
+            self.w0 -= der_w0 * self.step
+
+        # метод fit для sklearn должен возвращать self
         return self

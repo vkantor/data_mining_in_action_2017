@@ -1,5 +1,5 @@
 import os
-from xgboost_params_checker import Checker
+from text_classification_params_checker import Checker
 import json
 
 
@@ -7,10 +7,10 @@ if __name__ == '__main__':
     checker = Checker()
     scores = {}
     results = {}
-    for filename in os.listdir('xgboost_params'):
+    for filename in os.listdir('text_classification_params'):
         if filename.endswith('.json'):
-            name = '_'.join(filename.split()[0].split('_')[-1:]).strip()
-            score = checker.check('xgboost_params/' + filename)
+            name = '_'.join(filename.split()[0].split('_')[3:]).strip()
+            score = checker.check('text_classification_params/' + filename)
             print name, score
             if score is not None:
                 results[name] = score
@@ -19,11 +19,11 @@ if __name__ == '__main__':
 
     best_accuracy = max(results.values())
     for name in results:
-        scores[name] = max(round(2 ** (30 * (results[name] - best_accuracy)), 2), 0.05)
+        scores[name] = max(round(2 ** (50 * (results[name] - best_accuracy)), 2), 0.05)
 
-    with open('xgboost_params_results.json', 'w') as f:
+    with open('text_classification_params_results.json', 'w') as f:
         json.dump(scores, f, indent=4)
 
-    with open('xgboost_params_results.csv', 'w') as f:
+    with open('text_classification_params_results.csv', 'w') as f:
         for name in sorted(scores):
             f.write('{},{}\n'.format(name, scores[name]))

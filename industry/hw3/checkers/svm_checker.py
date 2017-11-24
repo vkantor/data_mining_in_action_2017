@@ -22,16 +22,18 @@ class Checker(object):
             n_redundant=0,
             random_state=42
         )
+        self.applications = 0
 
     def check(self, script_path):
-        #try:
-        signal.signal(signal.SIGALRM, signal_handler)
-        signal.alarm(20)
-        svm_impl = imp.load_source('svm_impl', script_path)
-        algo = svm_impl.MySVM(**svm_impl.SVM_PARAMS_DICT)
-        return np.mean(cross_val_score(algo, self.X_data, self.y_data, cv=2, scoring='accuracy'))
-        #except:
-        #    return None
+        try:
+            signal.signal(signal.SIGALRM, signal_handler)
+            signal.alarm(20)
+            svm_impl = imp.load_source('svm_impl_{}'.format(self.applications), script_path)
+            self.applications += 1
+            algo = svm_impl.MySVM(**svm_impl.SVM_PARAMS_DICT)
+            return np.mean(cross_val_score(algo, self.X_data, self.y_data, cv=2, scoring='accuracy'))
+        except:
+            return None
 
 
 if __name__ == '__main__':
