@@ -9,7 +9,7 @@ if __name__ == '__main__':
     results = {}
     for filename in os.listdir('simple_gb'):
         if filename.endswith('.py'):
-            name = filename.split('-')[-1].strip()[:-len('.py')]
+            name = '_'.join(filename.split()[0].split('_')[-1:]).strip()
             score = checker.check('simple_gb/' + filename)
             print name, score
             if score is not None:

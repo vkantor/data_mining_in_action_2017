@@ -9,7 +9,7 @@ if __name__ == '__main__':
     results = {}
     for filename in os.listdir('xgboost_params'):
         if filename.endswith('.json'):
-            name = filename.split('-')[-1].strip()[:-len('.json')]
+            name = '_'.join(filename.split()[0].split('_')[-1:]).strip()
             score = checker.check('xgboost_params/' + filename)
             print name, score
             if score is not None:
@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     best_accuracy = max(results.values())
     for name in results:
-        scores[name] = max(round(2 ** (2 * (results[name] - best_accuracy)), 2), 0.05)
+        scores[name] = max(round(2 ** (30 * (results[name] - best_accuracy)), 2), 0.05)
 
     with open('xgboost_params_results.json', 'w') as f:
         json.dump(scores, f, indent=4)
