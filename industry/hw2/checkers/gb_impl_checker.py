@@ -17,12 +17,14 @@ def signal_handler(signum, frame):
 class Checker(object):
     def __init__(self):
         self.X_data, self.y_data = make_friedman1(n_samples=1000, noise=10, n_features=10, random_state=777)
+        self.application = 0
 
     def check(self, script_path):
         try:
             signal.signal(signal.SIGALRM, signal_handler)
             signal.alarm(20)
-            gb_impl = imp.load_source('gb_impl', script_path)
+            gb_impl = imp.load_source('gb_impl_{}'.format(self.application), script_path)
+            self.application += 1
             algo = gb_impl.SimpleGB(
                 tree_params_dict=gb_impl.TREE_PARAMS_DICT,
                 iters=100,
